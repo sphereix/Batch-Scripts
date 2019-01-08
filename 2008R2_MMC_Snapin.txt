@@ -1,0 +1,48 @@
+I've managed to enable TSConfig in Windows 2012 from older Windows 2008R2 TSConfig. From a Windows 2008R2 server, copy tsconfig.msc and tsconfig.dll (from and to system32 folder) and load this into registry (also exported from 2008R2):
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\SnapIns\FX:{80aaa290-abd9-9239-7a2d-cf4f67e42128}]
+"ApplicationBase"=hex(2):43,00,3a,00,5c,00,57,00,69,00,6e,00,64,00,6f,00,77,00,\
+  73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,00,00
+"About"="{00000000-0000-0000-0000-000000000000}"
+"VersionStringIndirect"="@C:\\Windows\\System32\\umcRes.dll,-107"
+"ProviderStringIndirect"=hex(2):40,00,43,00,3a,00,5c,00,57,00,69,00,6e,00,64,\
+  00,6f,00,77,00,73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,\
+  5c,00,75,00,6d,00,63,00,52,00,65,00,73,00,2e,00,64,00,6c,00,6c,00,2c,00,2d,\
+  00,31,00,30,00,32,00,00,00
+"SmallFolderBitmapIndirect"=hex(2):40,00,43,00,3a,00,5c,00,57,00,69,00,6e,00,\
+  64,00,6f,00,77,00,73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,\
+  00,5c,00,75,00,6d,00,63,00,52,00,65,00,73,00,2e,00,64,00,6c,00,6c,00,2c,00,\
+  2d,00,31,00,32,00,30,00,00,00
+"NameString"="Remote Desktop Session Host Configuration"
+"HelpTopic"=hex(2):25,00,73,00,79,00,73,00,74,00,65,00,6d,00,72,00,6f,00,6f,00,\
+  74,00,25,00,5c,00,68,00,65,00,6c,00,70,00,5c,00,74,00,73,00,63,00,63,00,2e,\
+  00,63,00,68,00,6d,00,00,00
+"AssemblyName"="tsconfig"
+"RuntimeVersion"="v2.0.50215"
+"Description"="Configure Remote Desktop Session Host settings"
+"DescriptionStringIndirect"=hex(2):40,00,43,00,3a,00,5c,00,57,00,69,00,6e,00,\
+  64,00,6f,00,77,00,73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,\
+  00,5c,00,75,00,6d,00,63,00,52,00,65,00,73,00,2e,00,64,00,6c,00,6c,00,2c,00,\
+  2d,00,31,00,30,00,31,00,00,00
+"LinkedHelpTopics"="%systemroot%\\help\\tscc.chm"
+"NameStringIndirect"=hex(2):40,00,43,00,3a,00,5c,00,57,00,69,00,6e,00,64,00,6f,\
+  00,77,00,73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,\
+  75,00,6d,00,63,00,52,00,65,00,73,00,2e,00,64,00,6c,00,6c,00,2c,00,2d,00,31,\
+  00,30,00,30,00,00,00
+"IconIndirect"=hex(2):40,00,43,00,3a,00,5c,00,57,00,69,00,6e,00,64,00,6f,00,77,\
+  00,73,00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,75,00,\
+  6d,00,63,00,52,00,65,00,73,00,2e,00,64,00,6c,00,6c,00,2c,00,2d,00,31,00,31,\
+  00,30,00,00,00
+"FxVersion"="2.0.1.7"
+"Type"="Microsoft.TerminalServices.Configuration.SnapIn.TSConfigSnapIn, tsconfig, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"FolderBitmapsColorMask"=dword:00000000
+"ModuleName"="tsconfig.dll"
+"Provider"="Microsoft Corporation"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\SnapIns\FX:{80aaa290-abd9-9239-7a2d-cf4f67e42128}\NodeTypes]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\SnapIns\FX:{80aaa290-abd9-9239-7a2d-cf4f67e42128}\NodeTypes\{f86e6446-aaff-11d0-b944-00c04fd8d5b9}]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MMC\SnapIns\FX:{80aaa290-abd9-9239-7a2d-cf4f67e42128}\Standalone]
+
+This Works for my Windows 2012 server, including remote configuration for other Windows 2012 servers, but maybe with some limits (reading tsconfig.msc contents it seems that other snap-in extensions are included, but I've have not exported them). Be careful, maybe Microsoft doesn't support it ;-)
